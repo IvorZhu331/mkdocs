@@ -263,12 +263,8 @@ class MetaPlugin(BasePlugin):
             if "FAQ" in page.title or "faq" in page.meta.get("keywords", "").lower():
                 faqs = self.parse_faq(soup)
                 if faqs:
-                    ld_json_content = {
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": faqs
-                    }               
+                    ld_json_content = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faqs}
             ld_json_script.string = json.dumps(ld_json_content)
             soup.head.append(ld_json_script)
-            
+
         return str(soup)
